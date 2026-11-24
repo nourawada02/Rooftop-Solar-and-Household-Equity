@@ -54,12 +54,13 @@ def load_collection(database, name, path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-    parser.add_argument("--port", type=int, default=27017)
+    parser.add_argument("--port", type=int, help="MongoDB port (default: MONGO_PORT in .env, else 27018)")
     args = parser.parse_args()
 
     settings = read_env_file()
+    port = args.port or int(settings.get("MONGO_PORT", 27018))
     client = MongoClient(
-        host="localhost", port=args.port,
+        host="localhost", port=port,
         username=settings["MONGO_INITDB_ROOT_USERNAME"],
         password=settings["MONGO_INITDB_ROOT_PASSWORD"],
         authSource="admin",

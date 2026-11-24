@@ -39,8 +39,7 @@ pip install pymongo
 python mongodb/02_import_data.py
 ```
 
-This connects from Windows to `localhost:27017` using the login in `.env`. If another
-MongoDB is installed on the computer and already uses port 27017, the connection
-reaches that one instead and fails with "Authentication failed". In that case use
-the mongoimport commands above, or map the container to another port in
-`docker-compose.yml` (for example `"27018:27017"`) and run the script with `--port 27018`.
+This connects from Windows to the port in `MONGO_PORT` (27018 by default) using the
+login in `.env`. The project maps MongoDB to 27018, not the usual 27017, because a
+MongoDB already installed on the computer answers on 27017 and rejects the project's
+login with "Authentication failed".
