@@ -11,6 +11,9 @@ Which households can be chosen (the "sampling frame"):
      question compares categories.
   2. The household has at least 90% of the possible 2013 readings. A household that
      joined or left the trial mid-year would distort yearly and seasonal totals.
+  3. The meter is not reading zero most of the time. If the typical (median) reading
+     is zero on more than half of the household's 2013 days, the home is probably
+     empty or the meter is faulty, so it does not represent a lived-in household.
 
 The readings are copied exactly as they are in the raw files. No cleaning happens here.
 
@@ -18,7 +21,7 @@ Run from the project root:
     python cleaning/01_sample_households.py
 
 Outputs (in data/interim/):
-    household_coverage_2013.csv    every household, its category and 2013 coverage
+    household_coverage_2013.csv    every household, its 2013 coverage and eligibility
     sampled_households.csv         the 500 chosen households and their attributes
     london_halfhourly_sample.csv   their raw 2013 half-hourly readings
 """
@@ -39,18 +42,27 @@ SAMPLE_YEAR = "2013"
 HOUSEHOLDS_PER_CATEGORY = {"Adversity": 167, "Comfortable": 167, "Affluent": 166}
 READINGS_IN_FULL_YEAR = 365 * 48      # 17,520 half-hours
 MIN_COVERAGE = 0.90
+MAX_ZERO_DAY_SHARE = 0.50             # share of days whose median reading is zero
 TOTAL_BLOCKS = 112
 
 
-def count_readings_per_household():
-    """Count each household's 2013 readings, using the daily summary file."""
+def summarise_daily_file():
+    """Per household in 2013: number of readings, days recorded, days with a zero median."""
     readings = Counter()
+    days_recorded = Counter()
+    zero_median_days = Counter()
     with open(RAW_LONDON / "daily_dataset.csv", newline="") as f:
         for row in csv.DictReader(f):
             is_sample_year = row["day"].startswith(SAMPLE_YEAR)
-            if is_sample_year:
-                readings[row["LCLid"]] += int(row["energy_count"] or 0)
-    return readings
+            if not is_sample_year:
+                continue
+            household_id = row["LCLid"]
+            readings[household_id] += int(row["energy_count"] or 0)
+            days_recorded[household_id] += 1
+            has_zero_median = row["energy_median"] != "" and float(row["energy_median"]) == 0
+            if has_zero_median:
+                zero_median_days[household_id] += 1
+    return readings, days_recorded, zero_median_days
 
 
 def build_sampling_frame():
@@ -58,18 +70,26 @@ def build_sampling_frame():
     with open(RAW_LONDON / "informations_households.csv", newline="") as f:
         all_households = list(csv.DictReader(f))
 
-    readings = count_readings_per_household()
+    readings, days_recorded, zero_median_days = summarise_daily_file()
     for household in all_households:
-        coverage = readings.get(household["LCLid"], 0) / READINGS_IN_FULL_YEAR
+        household_id = household["LCLid"]
+        coverage = readings.get(household_id, 0) / READINGS_IN_FULL_YEAR
+        days = days_recorded.get(household_id, 0)
+        zero_day_share = zero_median_days.get(household_id, 0) / days if days else 0.0
+
         has_known_category = household["Acorn_grouped"] in HOUSEHOLDS_PER_CATEGORY
         has_enough_data = coverage >= MIN_COVERAGE
+        is_mostly_zero = zero_day_share > MAX_ZERO_DAY_SHARE
 
-        household["readings_2013"] = readings.get(household["LCLid"], 0)
+        household["readings_2013"] = readings.get(household_id, 0)
         household["coverage_2013"] = round(coverage, 4)
+        household["zero_day_share_2013"] = round(zero_day_share, 4)
         if not has_known_category:
             household["eligible"] = "no: unknown category"
         elif not has_enough_data:
             household["eligible"] = "no: under 90% coverage"
+        elif is_mostly_zero:
+            household["eligible"] = "no: mostly zero readings"
         else:
             household["eligible"] = "yes"
     return all_households
