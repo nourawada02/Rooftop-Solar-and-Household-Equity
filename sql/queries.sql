@@ -1,0 +1,4 @@
+-- queries.sql
+-- At least 8 queries, each with a one-sentence comment on what it shows.
+-- Required: 2+ multi-table JOINs, GROUP BY with HAVING, a subquery or CTE,
+-- a window function, and 1 VIEW used by Power BI.

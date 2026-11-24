@@ -1,0 +1,7 @@
+pandas
+numpy
+matplotlib
+jupyter
+requests
+psycopg2-binary
+pymongo

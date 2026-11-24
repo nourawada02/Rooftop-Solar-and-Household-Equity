@@ -1,0 +1,3 @@
+-- load.sql
+-- Loads the cleaned CSV files into PostgreSQL. To be written after Phase 1 (cleaning).
+-- Inside the container the cleaned files are available under /data/clean.

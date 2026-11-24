@@ -1,0 +1,11 @@
+# Large datasets stay out of git; see README for download steps
+data/raw/*
+data/clean/*
+!data/raw/.gitkeep
+!data/clean/.gitkeep
+
+.env
+__pycache__/
+.ipynb_checkpoints/
+*.pyc
+.venv/
