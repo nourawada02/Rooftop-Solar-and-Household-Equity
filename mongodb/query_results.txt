@@ -1,0 +1,83 @@
+{ nIndexesWas: 2, ok: 1 }
+=== Q1. Worst inverter-days (faults or missing data) ===
+{"system_id":"plant_2:WcxssY2VbP4hApt","date":{"$date":"2020-05-22T00:00:00Z"},"summary":{"energy_kwh":1226.3001,"missing_readings":0,"fault_readings":34}}
+{"system_id":"plant_2:81aHJ1q11NBPMrL","date":{"$date":"2020-05-27T00:00:00Z"},"summary":{"energy_kwh":1317.5495,"missing_readings":0,"fault_readings":33}}
+{"system_id":"plant_2:WcxssY2VbP4hApt","date":{"$date":"2020-06-07T00:00:00Z"},"summary":{"energy_kwh":1954.6417,"missing_readings":0,"fault_readings":24}}
+{"system_id":"plant_2:PeE6FRyGXUgsRhN","date":{"$date":"2020-06-06T00:00:00Z"},"summary":{"energy_kwh":2193.9531,"missing_readings":0,"fault_readings":24}}
+{"system_id":"plant_2:xoJJ8DcxJEcupym","date":{"$date":"2020-06-06T00:00:00Z"},"summary":{"energy_kwh":2342.2163,"missing_readings":0,"fault_readings":24}}
+{"system_id":"plant_2:vOuJvMaM2sgwLmb","date":{"$date":"2020-06-07T00:00:00Z"},"summary":{"energy_kwh":1918.3093,"missing_readings":0,"fault_readings":24}}
+{"system_id":"plant_2:81aHJ1q11NBPMrL","date":{"$date":"2020-06-07T00:00:00Z"},"summary":{"energy_kwh":1896.3539,"missing_readings":0,"fault_readings":24}}
+{"system_id":"plant_2:81aHJ1q11NBPMrL","date":{"$date":"2020-05-26T00:00:00Z"},"summary":{"energy_kwh":3581.741,"missing_readings":0,"fault_readings":24}}
+(8 documents)
+
+=== Q2. Five sunniest days in Beirut ===
+{"date":{"$date":"2013-04-23T00:00:00Z"},"summary":{"energy_kwh_per_kwp":6.1781,"sun_hours":12}}
+{"date":{"$date":"2013-04-25T00:00:00Z"},"summary":{"energy_kwh_per_kwp":6.125,"sun_hours":12}}
+{"date":{"$date":"2013-04-26T00:00:00Z"},"summary":{"energy_kwh_per_kwp":6.0509,"sun_hours":12}}
+{"date":{"$date":"2013-05-28T00:00:00Z"},"summary":{"energy_kwh_per_kwp":6.0302,"sun_hours":14}}
+{"date":{"$date":"2013-03-29T00:00:00Z"},"summary":{"energy_kwh_per_kwp":6.0142,"sun_hours":12}}
+(5 documents)
+
+=== Q3. Seasonal solar yield per city (kWh per kWp) ===
+{"_id":{"city":"beirut","season":"Summer"},"total_kwh_per_kwp":478.4078,"avg_kwh_per_day":5.2000847826086956,"days":92}
+{"_id":{"city":"beirut","season":"Spring"},"total_kwh_per_kwp":433.0464,"avg_kwh_per_day":4.707026086956522,"days":92}
+{"_id":{"city":"beirut","season":"Autumn"},"total_kwh_per_kwp":405.6208,"avg_kwh_per_day":4.457371428571428,"days":91}
+{"_id":{"city":"beirut","season":"Winter"},"total_kwh_per_kwp":286.8292,"avg_kwh_per_day":3.1869911111111113,"days":90}
+{"_id":{"city":"london","season":"Summer"},"total_kwh_per_kwp":368.3388,"avg_kwh_per_day":4.0036826086956525,"days":92}
+{"_id":{"city":"london","season":"Spring"},"total_kwh_per_kwp":267.7354,"avg_kwh_per_day":2.910167391304348,"days":92}
+{"_id":{"city":"london","season":"Autumn"},"total_kwh_per_kwp":193.7122,"avg_kwh_per_day":2.1287054945054944,"days":91}
+{"_id":{"city":"london","season":"Winter"},"total_kwh_per_kwp":115.1105,"avg_kwh_per_day":1.2790055555555555,"days":90}
+(8 documents)
+
+=== Q4. Average summer solar output by hour (kWh per kWp) ===
+{"_id":{"city":"beirut","hour":4},"avg_kwh_per_kwp":0.10501260869565218}
+{"_id":{"city":"beirut","hour":5},"avg_kwh_per_kwp":0.2918423913043478}
+{"_id":{"city":"beirut","hour":6},"avg_kwh_per_kwp":0.4701290217391304}
+{"_id":{"city":"beirut","hour":7},"avg_kwh_per_kwp":0.5994909782608696}
+{"_id":{"city":"beirut","hour":8},"avg_kwh_per_kwp":0.6564425}
+{"_id":{"city":"beirut","hour":9},"avg_kwh_per_kwp":0.6408107608695652}
+{"_id":{"city":"beirut","hour":10},"avg_kwh_per_kwp":0.6365968478260869}
+{"_id":{"city":"beirut","hour":11},"avg_kwh_per_kwp":0.6054532608695652}
+{"_id":{"city":"beirut","hour":12},"avg_kwh_per_kwp":0.5186091304347826}
+{"_id":{"city":"beirut","hour":13},"avg_kwh_per_kwp":0.3757852173913044}
+{"_id":{"city":"beirut","hour":14},"avg_kwh_per_kwp":0.21650565217391304}
+{"_id":{"city":"beirut","hour":15},"avg_kwh_per_kwp":0.06332597826086957}
+{"_id":{"city":"london","hour":6},"avg_kwh_per_kwp":0.05841630434782608}
+{"_id":{"city":"london","hour":7},"avg_kwh_per_kwp":0.1615392391304348}
+{"_id":{"city":"london","hour":8},"avg_kwh_per_kwp":0.2710983695652174}
+{"_id":{"city":"london","hour":9},"avg_kwh_per_kwp":0.36983065217391303}
+{"_id":{"city":"london","hour":10},"avg_kwh_per_kwp":0.42055750000000003}
+{"_id":{"city":"london","hour":11},"avg_kwh_per_kwp":0.4647738043478261}
+{"_id":{"city":"london","hour":12},"avg_kwh_per_kwp":0.49713576086956524}
+{"_id":{"city":"london","hour":13},"avg_kwh_per_kwp":0.4771011956521739}
+{"_id":{"city":"london","hour":14},"avg_kwh_per_kwp":0.43041869565217394}
+{"_id":{"city":"london","hour":15},"avg_kwh_per_kwp":0.3554259782608696}
+{"_id":{"city":"london","hour":16},"avg_kwh_per_kwp":0.27952228260869566}
+{"_id":{"city":"london","hour":17},"avg_kwh_per_kwp":0.14769641304347828}
+(24 documents)
+
+=== Q5. Normal versus fault readings in sunlight, per plant ===
+{"_id":{"plant":"plant_1","is_fault":false},"readings":30655,"avg_ac_power_kw":678.256020678519,"avg_irradiation":0.5106384896427989}
+{"_id":{"plant":"plant_1","is_fault":true},"readings":63,"avg_ac_power_kw":0,"avg_irradiation":0.7513825396825397}
+{"_id":{"plant":"plant_2","is_fault":false},"readings":25044,"avg_ac_power_kw":635.4141737302348,"avg_irradiation":0.48909270483948253}
+{"_id":{"plant":"plant_2","is_fault":true},"readings":3774,"avg_ac_power_kw":0,"avg_irradiation":0.7856194223635401}
+(4 documents)
+
+=== Q6. Yearly output with system details ($lookup) ===
+{"year_kwh_per_kwp":1603.9042,"days":365,"system_id":"pvgis_beirut","city":"beirut","coordinates":[35.502,33.894],"slope_deg":30,"system_loss_pct":14}
+{"year_kwh_per_kwp":944.8969,"days":365,"system_id":"pvgis_london","city":"london","coordinates":[-0.128,51.507],"slope_deg":38,"system_loss_pct":14}
+(2 documents)
+
+=== Q7. plant_1: inverter-days with an outage in strong sun ===
+9 of 748 inverter-days
+
+=== Q7. plant_2: inverter-days with an outage in strong sun ===
+260 of 716 inverter-days
+
+=== Q8. Effect of the index on (system_id, date) ===
+
+Before index: stage=COLLSCAN, documents examined=2194, keys examined=0, returned=1
+
+After index : stage=IXSCAN, documents examined=1, keys examined=1, returned=1
+
+Indexes on solar_daily: _id_, system_day
